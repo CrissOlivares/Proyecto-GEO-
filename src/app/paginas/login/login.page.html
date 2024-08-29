@@ -1,0 +1,20 @@
+<ion-app>
+  <ion-content >
+
+    <h2>Bienvenido (pag. login) </h2>
+    <ion-item>
+      <ion-input type="text" label="Usuario"  [(ngModel)]="usuario" placeholder="ejemplo: usuario.123@duocuc.cl"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="password" label="Contraseña" [(ngModel)]="contrasena" placeholder="***"><area shape="" coords="" href="" alt=""></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-button  expand="block" (click)="ingresar()" fill="clear" shape="round">
+        Ingresar
+      </ion-button>
+    </ion-item>
+  </ion-content>
+
+</ion-app>
