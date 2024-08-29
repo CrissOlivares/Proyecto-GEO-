@@ -3,15 +3,15 @@
 
     <h2>Bienvenido (pag. login) </h2>
     <ion-item>
-      <ion-input type="text" label="Usuario"  [(ngModel)]="usuario" placeholder="ejemplo: usuario.123@duocuc.cl"></ion-input>
+      <ion-input type="text" label="Usuario:"  name="usuario" [(ngModel)]="usuario" placeholder="ejemplo: usuario.123@duocuc.cl"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input type="password" label="Contraseña" [(ngModel)]="contrasena" placeholder="***"><area shape="" coords="" href="" alt=""></ion-input>
+      <ion-input type="password" label="Contraseña:"  name="password" [(ngModel)]="password" placeholder="Ingrese su contraseña"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-button  expand="block" (click)="ingresar()" fill="clear" shape="round">
+      <ion-button  expand="block" (click)="ingresar()" >
         Ingresar
       </ion-button>
     </ion-item>

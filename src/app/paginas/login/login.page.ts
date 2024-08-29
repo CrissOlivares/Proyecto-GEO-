@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -7,29 +8,42 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   usuario:string=""
-  contrasena:string=""
+  password:string=""
 
-  constructor(public mensaje:ToastController) {}
-    async mensajeExito() {
-      const toast = await this.mensaje.create({
-        message: 'Ingresando...',
-        duration: 1500
-      });
-      toast.present();
-    }
+  constructor(public mensaje:ToastController, private route:Router, public alerta:AlertController) { }
+  
+  async MensajeExito() {
+    const toast = await this.mensaje.create({
+      message: 'Ingresando...',
+      duration: 1500
+    });
+    toast.present();
+  }
+
+  async MensajeError() {
+    const alert = await this.alerta.create({
+      header: 'Error',
+      subHeader: 'Error en el inicio de sesion',
+      message: 'El inicio de sesion fallo',
+      buttons:['Aceptar']
+    });
+    await alert.present();
+}
    
-    ingresar(){
-      if (this.usuario =="" && this.contrasena=="") {
-        console.log("No pueden haber espacios en blanco")
-        
-      } else {
-        console.log("Inicio exitoso")
-        this.mensajeExito
-        
-      }
+ingresar(){
+  if (this.usuario ==="" || this.password==="") {
+    console.log("No pueden haber espacios en blanco")
+    
     }
+  if (this.usuario ==="admin" && this.password==="6818") {
+    console.log("Inicio exitoso")
+    this.MensajeExito()
+    this.route.navigate(["/home"])  
+  } else {this.MensajeError()
+  
+  } 
+  }
 
   ngOnInit() {
   }

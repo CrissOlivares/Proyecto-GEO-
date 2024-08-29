@@ -1,2 +1,11 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+:root {
+    //toolbar//
+	--ion-color-toolbar: #ff00ae;
+	--ion-color-toolbar-rgb: 255,0,174;
+	--ion-color-toolbar-contrast: #000000;
+	--ion-color-toolbar-contrast-rgb: 0,0,0;
+	--ion-color-toolbar-shade: #e00099;
+	--ion-color-toolbar-tint: #ff1ab6;
+}
