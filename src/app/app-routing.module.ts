@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'resetear-pass',
     loadChildren: () => import('./paginas/resetear-pass/resetear-pass.module').then( m => m.ResetearPassPageModule)
   },
+  {
+    path: 'cuenta',
+    loadChildren: () => import('./paginas/cuenta/cuenta.module').then( m => m.CuentaPageModule)
+  },
 
 ];
 

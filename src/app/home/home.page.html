@@ -1,4 +1,5 @@
 <ion-app>
+  <!-- opciones que aparecen a la derecha -->
   <ion-content>
     <ion-menu  side="end" contentId="main-content">
       <ion-header>
@@ -7,13 +8,19 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-button shape="round" expand="full" >Estadisticas</ion-button>
-        <ion-button shape="round" expand="full" >Cuenta</ion-button>
+        <ion-button shape="round" expand="full" fill="">
+          Estadisticas</ion-button>
+          <ion-button shape="round" expand="full" fill="">
+            Cuenta</ion-button>
+            <ion-button shape="round" expand="full" fill="">
+              Sobre nosotros</ion-button>
         <br>
-        <ion-button (click)="salir()" expand="full" >Cerrar Sesión</ion-button>
-
+        <ion-button (click)="salir()" style="color: gray;" shape="round" expand="full" fill="">
+          <ion-icon name="log-out-outline" slot="end"></ion-icon>
+          Cerrar Sesión</ion-button>
       </ion-content>
     </ion-menu>
+<!-- página principal -->
     <div  class="ion-page" id="main-content">
       <ion-header >
         <ion-toolbar>
@@ -23,7 +30,7 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      <ion-content class="ion-padding"> Tap the button in the toolbar to open the menu. </ion-content>
+      <ion-content class="ion-padding"></ion-content>
     </div>
   </ion-content>
 </ion-app>
