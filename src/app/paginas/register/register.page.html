@@ -2,7 +2,7 @@
   <ion-content [fullscreen]="true">
     <div class="header">
       <ion-title class="titulo">BIENVENIDO</ion-title>
-    <p class="subtitulo">Inicia sesión
+    <p class="subtitulo">Registra una cuenta
     </p>
     <!-- aqui va el logo -->
     <ion-grid>
@@ -18,28 +18,30 @@
 <!-- ingreso usuario y contraseña -->
       <div class="ion-padding">
       <ion-item>
-        <ion-input type="email" label=""  name="correo" [(ngModel)]="correo" placeholder="correo electronico"></ion-input>
+        <ion-input type="email" label=""  name="correo"  placeholder="correo electronico"></ion-input>
         <ion-icon name="mail-outline"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-input type="password" label=""  name="password" [(ngModel)]="password" placeholder="contraseña"></ion-input>
+        <ion-input type="text" label=""  name="usuario"  placeholder="nombre de usuario"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-input type="password" label=""  name="password" placeholder="contraseña"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-item>
 <!-- boton para ingresar a la pagina principal si hizo el login correcto -->
         <ion-item>
-          <ion-button expand="block" (click)="ingresar()" >
-            Ingresar
+          <ion-button expand="block" >
+            Crear Cuenta
           </ion-button>
         </ion-item>
       </div>
-<!-- Esto te lleva a la pagina de resetar la pass -->
-      <div class="claveOlv">
-        <a [routerLink]="['/resetear-pass']" style="color: #FF914D;">¿Olvidaste tu contraseña?</a>
-      </div>
 <!-- Esto te lleva a la paginal register -->      
       <div class="claveOlv">
-        <p>¿Eres nuevo?<a [routerLink]="['/register']" style="color:#FF914D;"> Registrate aquí</a></p>
+        <p>Ya soy miembro <a [routerLink]="['/login']" style="color:#FF914D;">Volver al inicio de sesión</a></p>
       </div>
     </form>
   </ion-content>
 </ion-app>
+
+

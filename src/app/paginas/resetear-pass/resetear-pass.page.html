@@ -1,0 +1,23 @@
+<ion-app>
+<ion-content [fullscreen]="true">
+      <div class="header">
+        <ion-title class="titulo">Recuperación</ion-title>
+      <p class="subtitulo">Ingresa tu correo para comenzar la recuperación de contraseña
+      </p>
+      </div>
+  <div class="ion-padding">
+    <ion-item>
+      <ion-input type="email" label=""  name="correo"  placeholder="correo electronico"></ion-input>
+      <ion-icon name="mail-outline"></ion-icon>
+    </ion-item>
+      <ion-item>
+        <ion-button expand="block" >
+          Enviar
+        </ion-button>
+      </ion-item>
+      <div class="claveOlv">
+        <p><a [routerLink]="['/login']" style="color:#FF914D;">Volver al inicio de sesión</a></p>
+      </div>
+    </div>
+</ion-content>
+</ion-app>

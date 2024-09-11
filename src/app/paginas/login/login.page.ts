@@ -8,7 +8,7 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  usuario:string=""
+  correo:string=""
   password:string=""
 
   constructor(public mensaje:ToastController, private route:Router, public alerta:AlertController) { }
@@ -32,11 +32,11 @@ export class LoginPage implements OnInit {
 }
    
 ingresar(){
-  if (this.usuario ==="" || this.password==="") {
+  if (this.correo ==="" || this.password==="") {
     console.log("No pueden haber espacios en blanco")
     
     }
-  if (this.usuario ==="admin" && this.password==="6818") {
+  if (this.correo ==="admin@admin" && this.password==="6818") {
     console.log("Inicio exitoso")
     this.MensajeExito()
     this.route.navigate(["/home"])  
