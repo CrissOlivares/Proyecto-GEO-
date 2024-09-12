@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
+import { IonFabList } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  
   constructor(private route:Router) { }
 
 
@@ -23,4 +24,16 @@ export class HomePage {
   sobre(){
     this.route.navigate(["/sobre"]) 
   }
+
+  // test boton añadir
+  add(){
+    console.log('add')
+    alert("añadir")
+  }
+  canceladd(){
+    console.log('addcash')
+  }
+
+  
+  
 }
