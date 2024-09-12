@@ -33,6 +33,10 @@ ion-toolbar{
   --background: #18555C;
   --color:#f1f1f1;
 }
+ion-toolbar.footer{
+  --background: #f1f1f1;
+  --color:gray;
+}
 
 ion-item{
   --background:'#f1f1f1';
