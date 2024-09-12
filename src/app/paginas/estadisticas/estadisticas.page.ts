@@ -10,7 +10,16 @@ export class EstadisticasPage implements OnInit {
 
   constructor(private route:Router) { }
 
+
+  salir(){
+    this.route.navigate(["/home"]) 
+  }
+
   ngOnInit() {
   }
 
 }
+
+
+
+  

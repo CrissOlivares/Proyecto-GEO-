@@ -14,4 +14,13 @@ export class HomePage {
   salir(){
     this.route.navigate(["/login"]) 
   }
+  cuenta(){
+    this.route.navigate(["/cuenta"]) 
+  }
+  estadisticas(){
+    this.route.navigate(["/estadisticas"]) 
+  }
+  sobre(){
+    this.route.navigate(["/sobre"]) 
+  }
 }

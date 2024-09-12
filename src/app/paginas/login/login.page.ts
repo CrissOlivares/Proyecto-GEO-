@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   
   async MensajeExito() {
     const toast = await this.mensaje.create({
-      message: 'Ingresando...',
+      message: 'Ingresando a GeoCash',
       duration: 1500
     });
     toast.present();
@@ -24,8 +24,8 @@ export class LoginPage implements OnInit {
   async MensajeError() {
     const alert = await this.alerta.create({
       header: 'Error',
-      subHeader: 'Error en el inicio de sesion',
-      message: 'El inicio de sesion fallo',
+      subHeader: 'Fallo al iniciar',
+      message: 'Las credenciales no son válidas, intentalo de nuevo',
       buttons:['Aceptar']
     });
     await alert.present();
