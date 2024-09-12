@@ -1,14 +1,14 @@
 <ion-app>
   <ion-content [fullscreen]="true" >
     <div class="header">
-      <ion-title class="titulo">BIENVENIDO</ion-title>
+      <h5 class="titulo-h5">BIENVENIDO</h5>
     <p class="subtitulo">Inicia sesión
     </p>
     <!-- aqui va el logo -->
     <ion-grid>
     <ion-row>
       <ion-col class="ion-text-center">
-        <img class="geo" src="assets/geo.png" alt="" width="80">
+        <img class="geo scale-up-bottom" src="assets/geo.png" alt="" width="80">
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -18,23 +18,23 @@
 <!-- ingreso usuario y contraseña -->
       <div class="ion-padding">
       <ion-item>
-        <ion-input type="email" label=""  name="correo" [(ngModel)]="correo" placeholder="correo electronico"></ion-input>
+        <ion-input type="email" label=""  name="correo" [(ngModel)]="correo" placeholder="Correo Electronico"></ion-input>
         <ion-icon name="mail-outline"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-input type="password" label=""  name="password" [(ngModel)]="password" placeholder="contraseña"></ion-input>
+        <ion-input type="password" label=""  name="password" [(ngModel)]="password" placeholder="Contraseña"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-item>
 <!-- boton para ingresar a la pagina principal si hizo el login correcto -->
-        <ion-item>
+        <div class="boton2">
           <ion-button expand="block" (click)="ingresar()" >
             Ingresar
           </ion-button>
-        </ion-item>
+        </div>
       </div>
 <!-- Esto te lleva a la pagina de resetar la pass -->
       <div class="claveOlv">
-        <a [routerLink]="['/resetear-pass']" style="color: #FF914D;">¿Olvidaste tu contraseña?</a>
+        <p>Ya eres usuario <a [routerLink]="['/resetear-pass']" style="color: #FF914D;">¿Olvidaste tu contraseña?</a></p>
       </div>
 <!-- Esto te lleva a la paginal register -->      
       <div class="claveOlv">

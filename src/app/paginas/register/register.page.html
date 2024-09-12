@@ -1,14 +1,14 @@
 <ion-app>
   <ion-content [fullscreen]="true">
     <div class="header">
-      <ion-title class="titulo">BIENVENIDO</ion-title>
+      <h5 class="titulo-h5">BIENVENIDO</h5>
     <p class="subtitulo">Registra una cuenta
     </p>
     <!-- aqui va el logo -->
     <ion-grid>
     <ion-row>
       <ion-col class="ion-text-center">
-        <img class="geo" src="assets/geo.png" alt="" width="80">
+        <img class="geo scale-up-bottom" src="assets/geo.png" alt="" width="80">
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -18,23 +18,23 @@
 <!-- ingreso usuario y contraseña -->
       <div class="ion-padding">
       <ion-item>
-        <ion-input type="email" label=""  name="correo"  placeholder="correo electronico"></ion-input>
+        <ion-input type="email" label=""  name="correo"  placeholder="Correo Electronico"></ion-input>
         <ion-icon name="mail-outline"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-input type="text" label=""  name="usuario"  placeholder="nombre de usuario"></ion-input>
+        <ion-input type="text" label=""  name="usuario"  placeholder="Nombre de Usuario"></ion-input>
         <ion-icon name="person-outline"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-input type="password" label=""  name="password" placeholder="contraseña"></ion-input>
+        <ion-input type="password" label=""  name="password" placeholder="Contraseña"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-item>
 <!-- boton para ingresar a la pagina principal si hizo el login correcto -->
-        <ion-item>
+        <div class="boton2">
           <ion-button expand="block" >
             Crear Cuenta
           </ion-button>
-        </ion-item>
+        </div>
       </div>
 <!-- Esto te lleva a la paginal register -->      
       <div class="claveOlv">
