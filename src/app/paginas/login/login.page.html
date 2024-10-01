@@ -16,22 +16,25 @@
   
     <form>
 <!-- ingreso usuario y contraseña -->
-      <div class="ion-padding">
+<div class="ion-padding">
+    <form [formGroup]="formularioLogin">
       <ion-item>
-        <ion-input type="email" label=""  name="correo" [(ngModel)]="correo" placeholder="Correo Electronico"></ion-input>
+        <ion-input formControlName="correo" placeholder="Correo Electronico"></ion-input>
         <ion-icon name="mail-outline"></ion-icon>
       </ion-item>
       <ion-item>
-        <ion-input type="password" label=""  name="password" [(ngModel)]="password" placeholder="Contraseña"></ion-input>
+        <ion-input formControlName="password" type="password"  placeholder="Correo Electronico" placeholder="Contraseña"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>
       </ion-item>
+    </form>
 <!-- boton para ingresar a la pagina principal si hizo el login correcto -->
         <div class="boton2">
           <ion-button expand="block" (click)="ingresar()" >
             Ingresar
           </ion-button>
         </div>
-      </div>
+</div>
+          
 <!-- Esto te lleva a la pagina de resetar la pass -->
       <div class="claveOlv">
        <a [routerLink]="['/resetear-pass']" style="color: #FF914D;">¿Olvidaste tu contraseña?</a>
