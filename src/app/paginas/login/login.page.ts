@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormControl,
   Validators,FormBuilder } from '@angular/forms';
 
@@ -15,7 +15,7 @@ formularioLogin: FormGroup;
   // // correo:string=""
   // // password:string=""
 
-  constructor(public fb:FormBuilder, public mensaje:ToastController, private route:Router, public alerta:AlertController) {
+  constructor(public fb:FormBuilder, public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController) {
     this.formularioLogin = this.fb.group({
       'usuario':new FormControl("",Validators.required),
       'correo':new FormControl("",Validators.required),
@@ -40,7 +40,33 @@ formularioLogin: FormGroup;
     });
     await alert.present();
 }
-   
+ 
+
+  // comprobar los datos con el localstorage del register
+  async ingresar() {
+    var f = this.formularioLogin.value;
+    var usuarioString = localStorage.getItem('usuario');
+    if (usuarioString !== null) {
+      var usuario = JSON.parse(usuarioString);
+      if (usuario.correo == f.correo && usuario.password == f.password) {
+        localStorage.setItem('ingresado', 'true');
+        this.MensajeExito();
+        this.navCtrl.navigateRoot('home');
+      } else {
+        this.MensajeError();
+        };
+        
+      }
+    }
+
+
+      
+
+  ngOnInit() {
+  }
+  }
+ 
+
 // ingresa(){
 //   if (this.correo ==="" || this.password==="") {
 //     console.log("No pueden haber espacios en blanco")
@@ -54,25 +80,3 @@ formularioLogin: FormGroup;
   
 //   } 
 //   }
-
-  ngOnInit() {
-  }
-
-  async ingresar() {
-    var f = this.formularioLogin.value;
-    var usuarioString = localStorage.getItem('usuario');
-    if (usuarioString !== null) {
-      var usuario = JSON.parse(usuarioString);
-      if (usuario.correo == f.correo && usuario.password == f.password) {
-        localStorage.setItem('ingresado', 'true');
-        this.MensajeExito();
-      } else {
-        this.MensajeError();
-        };
-        
-      }
-    }
-
-  }
- 
-

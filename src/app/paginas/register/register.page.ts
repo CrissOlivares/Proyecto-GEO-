@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormControl,
   Validators,FormBuilder } from '@angular/forms';
 
@@ -12,10 +12,10 @@ import { FormGroup, FormControl,
 export class RegisterPage implements OnInit {
   formularioRegister: FormGroup;
 
-correo:string=""
-password:string=""
-usuario:string=""
-constructor(public fb:FormBuilder,public mensaje:ToastController, private route:Router, public alerta:AlertController) {
+// correo:string=""
+// password:string=""
+// usuario:string=""
+constructor(public fb:FormBuilder,public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController) {
   this.formularioRegister = this.fb.group({
     'usuario':new FormControl("",Validators.required),
     'correo':new FormControl("",Validators.required),
@@ -43,22 +43,6 @@ async MensajeError() {
   await alert.present();
   return;
 }
- 
-// de momento esta sin uso
-registrar(){
-if (this.correo ==="" || this.password==="" || this.usuario==="") {
-  console.log("No pueden haber espacios en blanco")
-  this.MensajeError()
-  }
-else {console.log("Creación de cuenta con éxito")
-  this.MensajeExito()
-  this.route.navigate(["/login"]) 
-
-} 
-}
-
-ngOnInit() {
-}
 
 async  registrarse(){
   var f=this.formularioRegister.value;
@@ -78,4 +62,24 @@ async  registrarse(){
 
 }
 
+
+
+
+ngOnInit() {
 }
+}
+
+
+
+// // de momento esta sin uso
+// registrar(){
+// if (this.correo ==="" || this.password==="" || this.usuario==="") {
+//   console.log("No pueden haber espacios en blanco")
+//   this.MensajeError()
+//   }
+// else {console.log("Creación de cuenta con éxito")
+//   this.MensajeExito()
+//   this.route.navigate(["/login"]) 
+
+// } 
+// }
