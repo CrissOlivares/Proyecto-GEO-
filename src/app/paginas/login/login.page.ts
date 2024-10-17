@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormControl,
   Validators,FormBuilder } from '@angular/forms';
+import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ formularioLogin: FormGroup;
   // // correo:string=""
   // // password:string=""
 
-  constructor(public fb:FormBuilder, public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController) {
+  constructor(public fb:FormBuilder, public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController, private loginFirebase:FirebaseLoginService) {
     this.formularioLogin = this.fb.group({
       'usuario':new FormControl("",Validators.required),
       'correo':new FormControl("",Validators.required),
@@ -43,7 +44,7 @@ formularioLogin: FormGroup;
  
 
   // comprobar los datos con el localstorage del register
-  async ingresar() {
+  /* async ingresar() {
     var f = this.formularioLogin.value;
     var usuarioString = localStorage.getItem('usuario');
     if (usuarioString !== null) {
@@ -57,7 +58,26 @@ formularioLogin: FormGroup;
         };
         
       }
+    }*/
+      async ingresar() {
+    var f = this.formularioLogin.value;
+    var usuarioString = localStorage.getItem('usuario');
+    if (f.usuario.correo == f.correo && f.usuario.password == f.password) {
+      console.log("No pueden haber espacios en blanco")
+    }else{
+      console.log(f.usuario.correo, f.usuario.password)
+      this.loginFirebase.login(f.usuario.correo, f.usuario.password)
+        .then(() => {
+          console.log("Inicio Exitoso");
+          this.MensajeExito();
+          this.route.navigate(["/home"]);
+        })
+        .catch((error) => {
+          console.log("Error en el inicio de sesion", error);
+          this.MensajeError();
+        });
     }
+   }
 
 
       
