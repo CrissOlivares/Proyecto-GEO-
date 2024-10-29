@@ -10,20 +10,14 @@ import { FormGroup, FormControl,
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  formularioRegister: FormGroup;
-
+  // formularioRegister: FormGroup;
+  regForm: FormGroup | undefined;
 // correo:string=""
 // password:string=""
 // usuario:string=""
 constructor(public fb:FormBuilder,public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController) {
-  this.formularioRegister = this.fb.group({
-    'usuario':new FormControl("",Validators.required),
-    'correo':new FormControl("",Validators.required),
-    'password':new FormControl("",Validators.required),
-    'confirmPassword':new FormControl("",Validators.required)
  
-  })
- }
+}
   
 async MensajeExito() {
   const toast = await this.mensaje.create({
@@ -44,28 +38,35 @@ async MensajeError() {
   return;
 }
 
-async  registrarse(){
-  var f=this.formularioRegister.value;
-  if(this.formularioRegister.invalid){
-    this.MensajeError()
-  }
-  else{this.MensajeExito()}
+// async  registrarse(){
+//   var f=this.formularioRegister.value;
+//   if(this.formularioRegister.invalid){
+//     this.MensajeError()
+//   }
+//   else{this.MensajeExito()}
 
-  var usuario ={
-    usuario:f.usuario,
-    correo:f.correo,
-    password:f.password
-  }
+//   var usuario ={
+//     usuario:f.usuario,
+//     correo:f.correo,
+//     password:f.password
+//   }
 
-  // aqui es donde se guardan los datos en local
-  localStorage.setItem('usuario', JSON.stringify(usuario))
+//   // aqui es donde se guardan los datos en local
+//   localStorage.setItem('usuario', JSON.stringify(usuario))
 
-}
+// }
 
 
 
 
 ngOnInit() {
+  this.regForm = this.fb.group({
+    fullname:['',[Validators.required]],
+    //ver pattern validators copy
+    email:['',[Validators.required,Validators.email,Validators.pattern("^[0-9]*$")]],
+    password:['',[Validators.required, Validators.pattern("^[0-9]*$")]],
+ 
+   }) 
 }
 }
 

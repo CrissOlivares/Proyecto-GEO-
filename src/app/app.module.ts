@@ -28,7 +28,6 @@ import { getVertexAI, provideVertexAI } from '@angular/fire/vertexai-preview';
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,AngularFireModule.initializeApp(environment.firebaseConfig),AngularFireAuthModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideFirebaseApp(() => initializeApp({"projectId":"projectgeo-6903e","appId":"1:171111184647:web:d1d84a232b2095eaaeada2","storageBucket":"projectgeo-6903e.appspot.com","apiKey":"AIzaSyBmlg0p_OHH7gfdG-8uvvQhEyJgVw0rwCY","authDomain":"projectgeo-6903e.firebaseapp.com","messagingSenderId":"171111184647","measurementId":"G-F8WHG8JL8P"})), provideAuth(() => getAuth()), provideAnalytics(() => getAnalytics()), ScreenTrackingService, UserTrackingService
-  // TODO get a reCAPTCHA Enterprise here https://console.cloud.google.com/security/recaptcha?project=_
 ],
   bootstrap: [AppComponent],
 })
