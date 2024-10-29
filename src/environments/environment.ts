@@ -4,13 +4,14 @@
 
 export const environment = {
   production: false,
-  firebaseConfig:{
-    apiKey:'AIzaSyAezR7gLwecwOx89T98MV8ExHfuAToixM8',
-    authDomain:'proyecto-geo-1f27c.firebaseapp.com',
-    projectId:'proyecto-geo-1f27c',
-    storageBuckets:'proyecto-geo-1f27c.appspot.com',
-    messagingSenderId:'768785740215',
-    appId:'1:768785740215:android:69ce669240588ac702b832',
+  firebaseConfig :{
+    apiKey: "AIzaSyBmlg0p_OHH7gfdG-8uvvQhEyJgVw0rwCY",
+    authDomain: "projectgeo-6903e.firebaseapp.com",
+    projectId: "projectgeo-6903e",
+    storageBucket: "projectgeo-6903e.appspot.com",
+    messagingSenderId: "171111184647",
+    appId: "1:171111184647:web:d1d84a232b2095eaaeada2",
+    measurementId: "G-F8WHG8JL8P"
   }
 };
 

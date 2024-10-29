@@ -44,7 +44,7 @@ formularioLogin: FormGroup;
  
 
   // comprobar los datos con el localstorage del register
-  /* async ingresar() {
+   async ingresar() {
     var f = this.formularioLogin.value;
     var usuarioString = localStorage.getItem('usuario');
     if (usuarioString !== null) {
@@ -58,26 +58,28 @@ formularioLogin: FormGroup;
         };
         
       }
-    }*/
-      async ingresar() {
-    var f = this.formularioLogin.value;
-    var usuarioString = localStorage.getItem('usuario');
-    if (f.usuario.correo == f.correo && f.usuario.password == f.password) {
-      console.log("No pueden haber espacios en blanco")
-    }else{
-      console.log(f.usuario.correo, f.usuario.password)
-      this.loginFirebase.login(f.usuario.correo, f.usuario.password)
-        .then(() => {
-          console.log("Inicio Exitoso");
-          this.MensajeExito();
-          this.route.navigate(["/home"]);
-        })
-        .catch((error) => {
-          console.log("Error en el inicio de sesion", error);
-          this.MensajeError();
-        });
     }
-   }
+
+
+  //     async ingresar() {
+  //   var f = this.formularioLogin.value;
+  //   var usuarioString = localStorage.getItem('usuario');
+  //   if (f.usuario.correo == f.correo && f.usuario.password == f.password) {
+  //     console.log("No pueden haber espacios en blanco")
+  //   }else{
+  //     console.log(f.usuario.correo, f.usuario.password)
+  //     this.loginFirebase.login(f.usuario.correo, f.usuario.password)
+  //       .then(() => {
+  //         console.log("Inicio Exitoso");
+  //         this.MensajeExito();
+  //         this.route.navigate(["/home"]);
+  //       })
+  //       .catch((error) => {
+  //         console.log("Error en el inicio de sesion", error);
+  //         this.MensajeError();
+  //       });
+  //   }
+  //  }
 
 
       
@@ -85,18 +87,3 @@ formularioLogin: FormGroup;
   ngOnInit() {
   }
   }
- 
-
-// ingresa(){
-//   if (this.correo ==="" || this.password==="") {
-//     console.log("No pueden haber espacios en blanco")
-    
-//     }
-//   if (this.correo ==="admin@admin" && this.password==="6818") {
-//     console.log("Inicio exitoso")
-//     this.MensajeExito()
-//     this.route.navigate(["/home"])  
-//   } else {this.MensajeError()
-  
-//   } 
-//   }

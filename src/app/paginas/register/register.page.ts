@@ -70,16 +70,3 @@ ngOnInit() {
 }
 
 
-
-// // de momento esta sin uso
-// registrar(){
-// if (this.correo ==="" || this.password==="" || this.usuario==="") {
-//   console.log("No pueden haber espacios en blanco")
-//   this.MensajeError()
-//   }
-// else {console.log("Creación de cuenta con éxito")
-//   this.MensajeExito()
-//   this.route.navigate(["/login"]) 
-
-// } 
-// }
