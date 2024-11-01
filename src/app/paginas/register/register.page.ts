@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormControl,
   Validators,FormBuilder } from '@angular/forms';
+import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
 
 @Component({
   selector: 'app-register',
@@ -11,14 +12,48 @@ import { FormGroup, FormControl,
 })
 export class RegisterPage implements OnInit {
   // formularioRegister: FormGroup;
-  regForm: FormGroup | undefined;
-// correo:string=""
-// password:string=""
-// usuario:string=""
-constructor(public fb:FormBuilder,public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController) {
- 
+  ionicForm!: FormGroup ;
+
+constructor(public fb:FormBuilder,public loadingCtrl: LoadingController, public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController, public authService:FirebaseLoginService ) {
+  
+
 }
   
+ngOnInit() {this.ionicForm = this.fb.group({
+  fullname:['',
+    [Validators.required]
+  ],
+  email: [
+    '',
+    [
+      Validators.required,
+      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+    ],
+  ],
+  password: ['', [
+    Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-8])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
+    Validators.required,
+    Validators.minLength(8),]],
+    
+  
+})
+ //termino validaciones
+}
+
+get errorControl(){
+  return this.ionicForm.controls;
+}
+
+async signUp(){
+  const loading = await this.loadingCtrl.create();
+  await loading.present();
+  if(this.ionicForm.valid){
+    // const user = await this.authService.registerUser(email,password)
+  }
+
+}
+
+
 async MensajeExito() {
   const toast = await this.mensaje.create({
     message: 'Cuenta creada con éxito, inicia sesión',
@@ -59,15 +94,8 @@ async MensajeError() {
 
 
 
-ngOnInit() {
-  this.regForm = this.fb.group({
-    fullname:['',[Validators.required]],
-    //ver pattern validators copy
-    email:['',[Validators.required,Validators.email,Validators.pattern("^[0-9]*$")]],
-    password:['',[Validators.required, Validators.pattern("^[0-9]*$")]],
- 
-   }) 
-}
-}
 
 
+
+
+}

@@ -17,30 +17,43 @@
     <form>
 <!-- ingreso usuario y contraseña(keyup.enter="guardar()") -->
       <div class="ion-padding">
-        <form [formGroup]="formularioRegister" >
+        <form [formGroup]="ionicForm" >
+          <div *ngIf="ionicForm.controls['fullname'].touched && ionicForm.controls['fullname'].invalid">
+            <ion-text *ngIf="errorControl['fullname'].errors?.['required']" class="errorInput" color="danger">El usuario es requerido</ion-text>
+            <ion-text *ngIf="errorControl['fullname'].errors?.['pattern']" class="errorInput" color="danger"></ion-text>
+          </div>
           <ion-item>
-            <ion-input formControlName="usuario" placeholder="Usuario"></ion-input>
+            <ion-input formControlName="fullname" placeholder="Usuario"></ion-input>
             <ion-icon name="mail-outline"></ion-icon>
           </ion-item>
+          
           <ion-item>
-            <ion-input formControlName="correo"  placeholder="Correo Electronico"></ion-input>
+            <div *ngIf="errorControl['email'].touched && errorControl['email'].invalid">
+              <ion-text *ngIf="errorControl['email'].errors?.['required']" class="errorInput" color="danger">El email es requerido</ion-text>
+              <ion-text *ngIf="errorControl['email'].errors?.['pattern']" class="errorInput" color="danger">Escribe un email válido.</ion-text>
+            </div>
+            <ion-input formControlName="email"  placeholder="Correo Electronico"></ion-input>
             <ion-icon name="mail-outline"></ion-icon>
           </ion-item>
+
           <ion-item>
             <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
             <ion-icon name="lock-closed-outline"></ion-icon>
           </ion-item>
-          <ion-item>
-            <ion-input formControlName="confirmPassword" type="password" placeholder="Confirmar Contraseña"></ion-input>
-            <ion-icon name="lock-closed-outline"></ion-icon>
-          </ion-item>
+          <div
+          *ngIf="ionicForm.controls['password'].touched && ionicForm.controls['fullname'].invalid">
+          <ion-text *ngIf="errorControl['password'].errors?.['required']" class="errorInput" color="danger">Escribe tu contraseña.</ion-text>
+          <ion-text *ngIf="errorControl['password'].errors?.['minlength']" class="errorInput" color="danger">Debe tener almenos 8 caracteres</ion-text>
+
+
+      </div>
         </form>
 <!-- boton para ingresar a la pagina principal si hizo el login correcto -->
-        <div class="boton2">
+        <!-- <div class="boton2">
           <ion-button expand="block" (click)="registrarse()" >
             Crear Cuenta
           </ion-button>
-        </div>
+        </div> -->
       </div>
 <!-- Esto te lleva a la paginal register -->      
       <div class="claveOlv">
