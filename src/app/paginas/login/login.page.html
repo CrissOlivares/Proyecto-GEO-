@@ -17,11 +17,21 @@
     <form>
 <!-- ingreso usuario y contraseña -->
 <div class="ion-padding">
-    <form [formGroup]="ionicForm">
+    <form [formGroup]="loginForm">
+      <div *ngIf="errorControl['email'].touched && errorControl['email'].invalid">
+        <ion-text *ngIf="errorControl['email'].errors?.['required']" class="errorInput" color="danger">El email es requerido</ion-text>
+        <ion-text *ngIf="errorControl['email'].errors?.['pattern']" class="errorInput" color="danger">Escribe un email válido.</ion-text>
+      </div>
       <ion-item>
-        <ion-input formControlName="correo" placeholder="Correo Electronico"></ion-input>
+        <ion-input formControlName="email" placeholder="Correo Electronico"></ion-input>
         <ion-icon name="mail-outline"></ion-icon>
       </ion-item>
+
+      <div
+          *ngIf="loginForm.controls['password'].touched && loginForm.controls['fullname'].invalid">
+          <ion-text *ngIf="errorControl['password'].errors?.['required']" class="errorInput" color="danger">Escribe tu contraseña.</ion-text>
+          <ion-text *ngIf="errorControl['password'].errors?.['minlength']" class="errorInput" color="danger">Debe tener almenos 8 caracteres</ion-text>
+      </div>
       <ion-item>
         <ion-input formControlName="password" type="password"  placeholder="Correo Electronico" placeholder="Contraseña"></ion-input>
         <ion-icon name="lock-closed-outline"></ion-icon>

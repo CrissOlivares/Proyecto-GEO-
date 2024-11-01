@@ -14,7 +14,7 @@ export class RegisterPage implements OnInit {
   // formularioRegister: FormGroup;
   ionicForm!: FormGroup ;
 
-constructor(public fb:FormBuilder,public loadingCtrl: LoadingController, public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController, public authService:FirebaseLoginService ) {
+constructor(public fb:FormBuilder,public loadingCtrl: LoadingController, public mensaje:ToastController, private router:Router, public alerta:AlertController, public navCtrl:NavController, public authService:FirebaseLoginService ) {
   
 
 }
@@ -23,8 +23,7 @@ ngOnInit() {this.ionicForm = this.fb.group({
   fullname:['',
     [Validators.required]
   ],
-  email: [
-    '',
+  email: ['',
     [
       Validators.required,
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
@@ -44,14 +43,40 @@ get errorControl(){
   return this.ionicForm.controls;
 }
 
-async signUp(){
+async signUP(){
   const loading = await this.loadingCtrl.create();
   await loading.present();
-  if(this.ionicForm.valid){
-    // const user = await this.authService.registerUser(email,password)
-  }
+  if (this.ionicForm.valid) {
 
+    const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password).catch((err: undefined) => {
+      this.presentToast(err)
+      console.log(err);
+      loading.dismiss();
+    })
+
+    if (user) {
+      loading.dismiss();
+      this.router.navigate(['/login'])
+    }
+  } else {
+    return console.log('Please provide all the required values!');
+  }
 }
+
+async presentToast(message: undefined) {
+  console.log(message);
+  
+  const toast = await this.mensaje.create({
+    message: message,
+    duration: 1500,
+    position: 'top',
+  });
+
+  await toast.present();
+}
+
+
+
 
 
 async MensajeExito() {
