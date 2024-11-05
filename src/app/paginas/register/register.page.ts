@@ -26,13 +26,13 @@ ngOnInit() {this.ionicForm = this.fb.group({
   email: ['',
     [
       Validators.required,
-      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+    
     ],
   ],
   password: ['', [
-    Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-8])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'),
+    
     Validators.required,
-    Validators.minLength(8),]],
+    ]],
     
   
 })
@@ -48,7 +48,7 @@ async signUP(){
   await loading.present();
   if (this.ionicForm.valid) {
 
-    const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password).catch((err: undefined) => {
+    const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password, this.ionicForm.value.fullname).catch((err: undefined) => {
       this.presentToast(err)
       console.log(err);
       loading.dismiss();
