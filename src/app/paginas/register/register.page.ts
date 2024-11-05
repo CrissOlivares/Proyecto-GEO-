@@ -98,23 +98,7 @@ async MensajeError() {
   return;
 }
 
-// async  registrarse(){
-//   var f=this.formularioRegister.value;
-//   if(this.formularioRegister.invalid){
-//     this.MensajeError()
-//   }
-//   else{this.MensajeExito()}
 
-//   var usuario ={
-//     usuario:f.usuario,
-//     correo:f.correo,
-//     password:f.password
-//   }
-
-//   // aqui es donde se guardan los datos en local
-//   localStorage.setItem('usuario', JSON.stringify(usuario))
-
-// }
 
 
 

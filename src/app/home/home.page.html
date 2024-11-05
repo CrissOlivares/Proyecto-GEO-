@@ -15,7 +15,7 @@
             <ion-button (click)="sobre()" shape="round" expand="full" fill="">
               Sobre nosotros</ion-button>
         <br>
-        <ion-button (click)="salir()" style="color: gray;" shape="round" expand="full" fill="">
+        <ion-button (click)="logOut()" style="color: gray;" shape="round" expand="full" fill="">
           <ion-icon name="log-out-outline" slot="end"></ion-icon>
           Cerrar Sesión</ion-button>
       </ion-content>
@@ -24,7 +24,7 @@
     <div  class="ion-page" id="main-content">
       <ion-header >
         <ion-toolbar>
-          <ion-title>Menú</ion-title>
+          <ion-title >Menú {{user.email}}</ion-title>
           <ion-buttons slot="end">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>

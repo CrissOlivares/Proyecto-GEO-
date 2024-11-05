@@ -37,15 +37,16 @@
             
           </ion-item>
 
-          <ion-item>
-            <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
-            <ion-icon name="lock-closed-outline"></ion-icon>
-          </ion-item>
           <div
           *ngIf="ionicForm.controls['password'].touched && ionicForm.controls['password'].invalid">
           <ion-text *ngIf="errorControl['password'].errors?.['required']" class="errorInput" color="danger">Escribe tu contraseña.</ion-text>
           <ion-text *ngIf="errorControl['password'].errors?.['minlength']" class="errorInput" color="danger">Debe tener almenos 8 caracteres</ion-text>
       </div>
+          <ion-item>
+            <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
+            <ion-icon name="lock-closed-outline"></ion-icon>
+          </ion-item>
+         
         </form>
 <!-- boton para ingresar a la pagina principal si hizo el login correcto -->
         <div class="boton2">

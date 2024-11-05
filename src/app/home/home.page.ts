@@ -1,6 +1,7 @@
 import { Component, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { IonFabList } from '@ionic/angular';
+import { FirebaseLoginService } from '../servicios/firebase-login.service';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +9,27 @@ import { IonFabList } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+user:any;
+  constructor(private route:Router,private router:Router,public authService:FirebaseLoginService) { 
+    
+  }
+
+  ngOnInit() {
+    this.user = this.authService.getProfile();
+  }
   
-  constructor(private route:Router) { }
+async logOut(){
+  this.authService.signOut().then(()=>{
+    this.router.navigate(['/login'])
+  }).catch((error)=>{
+    console.log(error);
+  })
+}
+
+
+
+
+
 
 
   salir(){

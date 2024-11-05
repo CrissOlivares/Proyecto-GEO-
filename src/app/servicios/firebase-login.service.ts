@@ -26,7 +26,7 @@ async signOut(){
   return await this.ngFireAuth.signOut()
 }
 async getProfile(){
-  return await this.ngFireAuth.currentUser;
+  return await this.ngFireAuth.onAuthStateChanged;
 }
 
 
