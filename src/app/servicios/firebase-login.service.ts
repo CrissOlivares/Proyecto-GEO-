@@ -10,7 +10,7 @@ export class FirebaseLoginService {
 
   constructor(public ngFireAuth:AngularFireAuth, private router:Router) { }
   //creacion usuario
-async registerUser(email:string,password:string){
+async registerUser(email:string,password:string, fullname:any){
   return await this.ngFireAuth.createUserWithEmailAndPassword(email,password);
 }
    //login usuario
@@ -21,8 +21,8 @@ async loginUser(email:string,password:string){
 async resetPassword(email:string){
   await this.ngFireAuth.sendPasswordResetEmail(email);
 }
-//logOut de usuario
-async logOut(){
+//signOut de usuario
+async signOut(){
   return await this.ngFireAuth.signOut()
 }
 async getProfile(){
