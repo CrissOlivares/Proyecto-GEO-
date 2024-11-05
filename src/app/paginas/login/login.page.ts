@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { FormGroup, FormControl,
   Validators,FormBuilder } from '@angular/forms';
 import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
@@ -11,19 +11,75 @@ import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-formularioLogin: FormGroup;
+  loginForm!: FormGroup;
 
-  // // correo:string=""
-  // // password:string=""
-
-  constructor(public fb:FormBuilder, public mensaje:ToastController, private route:Router, public alerta:AlertController, public navCtrl:NavController, private loginFirebase:FirebaseLoginService) {
-    this.formularioLogin = this.fb.group({
-      'usuario':new FormControl("",Validators.required),
-      'correo':new FormControl("",Validators.required),
-      'password':new FormControl("",Validators.required)
-    })
-   }
   
+
+  constructor(public fb:FormBuilder,public loadingCtrl: LoadingController, public mensaje:ToastController, private router:Router, public alerta:AlertController, public navCtrl:NavController, public authService:FirebaseLoginService ) {
+ 
+   }
+   ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['',
+        [
+          Validators.required,
+          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
+        ],
+      ],
+      password: ['', [
+        
+        Validators.required,
+        Validators.minLength(8),]],
+    });
+  }
+
+  async login() {
+    const loading = await this.loadingCtrl.create();
+    await loading.present();
+    // console.log(this.email + this.password);
+    if (this.loginForm.valid) {
+
+      // loading.dismiss();
+      const user = await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).catch((err) => {
+        this.presentToast(err)
+        console.log(err);
+        loading.dismiss();
+      })
+
+      if (user) {
+        loading.dismiss();
+        this.router.navigate(
+          ['/home'])
+      }
+    } else {
+      return console.log('Por favor rellena todos los espacios');
+    }
+
+  }
+
+  get errorControl() {
+    return this.loginForm.controls;
+  }
+
+  async presentToast(message: undefined) {
+    console.log(message);
+
+    const toast = await this.mensaje.create({
+      message: message,
+      duration: 1500,
+      position: 'top',
+    });
+
+    await toast.present();
+  }
+
+
+
+
+
+
+
+
   async MensajeExito() {
     const toast = await this.mensaje.create({
       message: 'Ingresando...',
@@ -43,47 +99,8 @@ formularioLogin: FormGroup;
 }
  
 
-  // comprobar los datos con el localstorage del register
-   async ingresar() {
-    var f = this.formularioLogin.value;
-    var usuarioString = localStorage.getItem('usuario');
-    if (usuarioString !== null) {
-      var usuario = JSON.parse(usuarioString);
-      if (usuario.correo == f.correo && usuario.password == f.password) {
-        localStorage.setItem('ingresado', 'true');
-        this.MensajeExito();
-        this.navCtrl.navigateRoot('home');
-      } else {
-        this.MensajeError();
-        };
-        
-      }
-    }
 
 
-  //     async ingresar() {
-  //   var f = this.formularioLogin.value;
-  //   var usuarioString = localStorage.getItem('usuario');
-  //   if (f.usuario.correo == f.correo && f.usuario.password == f.password) {
-  //     console.log("No pueden haber espacios en blanco")
-  //   }else{
-  //     console.log(f.usuario.correo, f.usuario.password)
-  //     this.loginFirebase.login(f.usuario.correo, f.usuario.password)
-  //       .then(() => {
-  //         console.log("Inicio Exitoso");
-  //         this.MensajeExito();
-  //         this.route.navigate(["/home"]);
-  //       })
-  //       .catch((error) => {
-  //         console.log("Error en el inicio de sesion", error);
-  //         this.MensajeError();
-  //       });
-  //   }
-  //  }
 
-
-      
-
-  ngOnInit() {
-  }
-  }
+ 
+}

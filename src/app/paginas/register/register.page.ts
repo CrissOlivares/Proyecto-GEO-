@@ -56,10 +56,10 @@ async signUP(){
 
     if (user) {
       loading.dismiss();
-      this.router.navigate(['/login'])
+      this.router.navigate(['/home'])
     }
   } else {
-    return console.log('Please provide all the required values!');
+    return console.log('Por favor rellena todos los espacios');
   }
 }
 

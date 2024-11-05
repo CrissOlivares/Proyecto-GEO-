@@ -14,7 +14,7 @@
   </ion-grid>
     </div>
   
-    <form>
+    
 <!-- ingreso usuario y contraseña(keyup.enter="guardar()") -->
       <div class="ion-padding">
         <form [formGroup]="ionicForm" >
@@ -28,7 +28,7 @@
           </ion-item>
 
           <ion-item>
-            <div *ngIf="errorControl['email'].touched && errorControl['email'].invalid">
+            <div *ngIf="ionicForm.controls['email'].touched && ionicForm.controls['email'].invalid">
               <ion-text *ngIf="errorControl['email'].errors?.['required']" class="errorInput" color="danger">El email es requerido</ion-text>
               <ion-text *ngIf="errorControl['email'].errors?.['pattern']" class="errorInput" color="danger">Escribe un email válido.</ion-text>
             </div>
@@ -58,7 +58,7 @@
       <div class="claveOlv">
         <p>Ya soy miembro <a [routerLink]="['/login']" style="color:#FF914D;">Volver al inicio de sesión</a></p>
       </div>
-    </form>
+    
   </ion-content>
 </ion-app>
 
