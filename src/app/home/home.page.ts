@@ -19,6 +19,9 @@ map: any;
 
 @ViewChild('map',{read:ElementRef,static:false}) mapRef!: ElementRef;
 
+infoWindows: any = [];
+markers: any = []
+
   constructor(private route:Router,private router:Router,
     public authService:FirebaseLoginService
   ) {}
@@ -27,6 +30,7 @@ map: any;
     this.showMap(); // Mostrar el mapa cuando la vista esté cargada
   }
 
+  // Método para obtener y mostrar el mapa
   showMap() {
     // Verifica que 'google' y 'google.maps' estén disponibles antes de acceder a ellos
     if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
@@ -34,20 +38,61 @@ map: any;
       return;
     }
 
-    // Definir la ubicación inicial del mapa
-    const location = new google.maps.LatLng(-17.824858, 31.053028);
+    // Intentamos obtener la ubicación actual
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // Obtiene las coordenadas de la ubicación actual
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
 
-    // Opciones del mapa
-    const options = {
-      center: location,
-      zoom: 15,
-      disableDefaultUI: true, // Deshabilitar los controles predeterminados del mapa
-    };
+          // Crear el objeto LatLng con la ubicación actual
+          const location = new google.maps.LatLng(latitude, longitude);
 
-    // Crear el mapa
-    this.map = new google.maps.Map(this.mapRef.nativeElement, options); // Usamos 'google.maps.Map'
+          // Opciones del mapa
+          const options = {
+            center: location, // Usamos la ubicación actual como el centro
+            zoom: 15,
+            disableDefaultUI: true, // Deshabilitar los controles predeterminados del mapa
+          };
+
+          // Crear el mapa
+          this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+
+          // Agregar un marcador en la ubicación actual
+          new google.maps.Marker({
+            position: location,
+            map: this.map,
+            title: 'Ubicación actual',
+          });
+        },
+        (error) => {
+          console.error('Error al obtener la ubicación: ', error);
+          // Si no se puede obtener la ubicación, podemos mostrar una ubicación por defecto
+          const defaultLocation = new google.maps.LatLng(-17.824858, 31.053028);
+          const options = {
+            center: defaultLocation,
+            zoom: 15,
+            disableDefaultUI: true,
+          };
+          this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+        }
+      );
+    } else {
+      console.error('Geolocalización no es compatible con este navegador');
+      // Si la geolocalización no está disponible, usamos una ubicación predeterminada
+      const defaultLocation = new google.maps.LatLng(-17.824858, 31.053028);
+      const options = {
+        center: defaultLocation,
+        zoom: 15,
+        disableDefaultUI: true,
+      };
+      this.map = new google.maps.Map(this.mapRef.nativeElement, options);
+    }
   }
 
+
+  
 
 
 
