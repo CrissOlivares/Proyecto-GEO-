@@ -44,6 +44,10 @@ ion-item{
  margin-bottom: 16px;
 }
 
+#map{
+  height: 100%;
+}
+
 ion-fab-button::part(native) {
   background-color: #FF914D;
   border-radius: 15px;
