@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'estadisticas',
-    loadChildren: () => import('./paginas/estadisticas/estadisticas.module').then( m => m.EstadisticasPageModule)
+    loadChildren: () => import('./paginas/estadisticas/estadisticas.module').then( m => m.EstadisticasPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'register',
@@ -39,7 +39,7 @@ const routes: Routes = [
   },
   {
     path: 'cuenta',
-    loadChildren: () => import('./paginas/cuenta/cuenta.module').then( m => m.CuentaPageModule)
+    loadChildren: () => import('./paginas/cuenta/cuenta.module').then( m => m.CuentaPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'error404',
