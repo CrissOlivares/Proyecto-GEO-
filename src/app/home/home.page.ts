@@ -25,13 +25,15 @@ marker: any;
 
 
   constructor(private route:Router,
-    public authService:FirebaseLoginService
+    public authService:FirebaseLoginService,
   ) {}
 
   ionViewDidEnter() {
     this.showMap(); // Mostrar el mapa cuando la vista esté cargada
   }
 
+
+  
   // Método para obtener y mostrar el mapa
   showMap() {
     // Verifica que 'google' y 'google.maps' estén disponibles antes de acceder a ellos
@@ -156,21 +158,21 @@ addClickListener() {
   
 
 
-
-
-
-
-  ngOnInit() {
-    this.user = this.authService.getProfile();
-  }
-  
-async logOut(){
-  this.authService.signOut().then(()=>{
-    this.route.navigate(['/login'])
-  }).catch((error)=>{
-    console.log(error);
-  })
+ngOnInit() {
+  this.user = this.authService.getProfile();
 }
+
+async logOut(){
+this.authService.signOut().then(()=>{
+  this.route.navigate(['/login'])
+}).catch((error)=>{
+  console.log(error);
+})
+}
+
+
+
+ 
 
 
   salir(){

@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
     if (this.loginForm.valid) {
 
       // loading.dismiss();
-      const user = await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).catch((err) => {
+      const user = await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password,this.loginForm.value.fullname).catch((err) => {
         this.presentToast(err)
         console.log(err);
         loading.dismiss();
