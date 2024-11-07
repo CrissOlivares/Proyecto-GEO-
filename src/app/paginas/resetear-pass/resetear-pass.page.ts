@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
 
 @Component({
   selector: 'app-resetear-pass',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resetear-pass.page.scss'],
 })
 export class ResetearPassPage implements OnInit {
-
-  constructor() { }
+email:any
+  constructor(public authService: FirebaseLoginService, public route:Router) {}
 
   ngOnInit() {
+   
   }
+  async resetPassword(){
+  this.authService.resetPassword(this.email).then(()=>
+    this.route.navigate(['/login']))
+}
 
 }

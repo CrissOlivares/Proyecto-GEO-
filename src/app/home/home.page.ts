@@ -17,8 +17,8 @@ export class HomePage {
 user:any;
 map: any;
 marker: any;
-  markerNumber: number | undefined; // Variable para almacenar el número asociado al marcador
-  isMarkingEnabled: boolean = false; // Controla si el usuario puede marcar lugares en el mapa
+  markerNumber: number | undefined; 
+  isMarkingEnabled: boolean = false; 
 
 
 @ViewChild('map',{read:ElementRef,static:false}) mapRef!: ElementRef;
@@ -29,7 +29,7 @@ marker: any;
   ) {}
 
   ionViewDidEnter() {
-    this.showMap(); // Mostrar el mapa cuando la vista esté cargada
+    this.showMap(); 
   }
 
 
@@ -42,7 +42,7 @@ marker: any;
       return;
     }
 
-    // Intentamos obtener la ubicación actual
+    // obtener la ubicación actual
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -55,15 +55,15 @@ marker: any;
 
           // Opciones del mapa
           const options = {
-            center: location, // Usamos la ubicación actual como el centro
+            center: location, //ubicación actual como el centro
             zoom: 15,
-            disableDefaultUI: true, // Deshabilitar los controles predeterminados del mapa
+            disableDefaultUI: true, 
           };
 
-          // Crear el mapa
+          // Crea el mapa
           this.map = new google.maps.Map(this.mapRef.nativeElement, options);
 
-          // Agregar un marcador en la ubicación actual
+          // marcador en la ubicación actual
           new google.maps.Marker({
             position: location,
             map: this.map,
@@ -72,7 +72,7 @@ marker: any;
         },
         (error) => {
           console.error('Error al obtener la ubicación: ', error);
-          // Si no se puede obtener la ubicación, podemos mostrar una ubicación por defecto
+          //ubicacion por defecto
           const defaultLocation = new google.maps.LatLng(-17.824858, 31.053028);
           const options = {
             center: defaultLocation,
@@ -84,7 +84,7 @@ marker: any;
       );
     } else {
       console.error('Geolocalización no es compatible con este navegador');
-      // Si la geolocalización no está disponible, usamos una ubicación predeterminada
+      // Si la geolocalización no está disponible, ubicación predeterminada
       const defaultLocation = new google.maps.LatLng(-17.824858, 31.053028);
       const options = {
         center: defaultLocation,

@@ -20,12 +20,12 @@ export class FirebaseLoginService {
     try {
       const userCredential = await this.ngFireAuth.signInWithEmailAndPassword(email, password);
 
-      // Guardar en localStorage (puedes guardar lo que necesites, por ejemplo, el UID y token)
+      // Guardar en localStorage 
       if (userCredential.user) {
         const user = userCredential.user;
-        const token = await user.getIdToken(); // Obtienes el token de acceso
-        localStorage.setItem('user', JSON.stringify(user));  // Guardamos el objeto del usuario
-        localStorage.setItem('token', token);  // Guardamos el token
+        const token = await user.getIdToken(); //  token de acceso
+        localStorage.setItem('user', JSON.stringify(user));  // objeto del usuario
+        localStorage.setItem('token', token);  // save  del token
       }
 
       return userCredential;
@@ -44,22 +44,22 @@ export class FirebaseLoginService {
   async signOut() {
     try {
       await this.ngFireAuth.signOut();
-      localStorage.removeItem('user'); // Eliminamos el objeto del usuario
-      localStorage.removeItem('token'); // Eliminamos el token
-      this.router.navigate(['/login']); // Redirigimos al login
+      localStorage.removeItem('user'); // Eliminacion del objeto del userr
+      localStorage.removeItem('token'); 
+      this.router.navigate(['/login']); 
     } catch (error) {
       console.error("Error al cerrar sesión", error);
       throw error;
     }
   }
 
-  // Obtener perfil (ejemplo de cómo acceder a los datos del usuario en localStorage)
+  // Obtener perfil 
   getProfile() {
     const user = localStorage.getItem('user');
     if (user) {
       return JSON.parse(user); // Devuelve el usuario desde localStorage
     } else {
-      return null; // Si no está logueado, no hay usuario
+      return null; 
     }
   }
 

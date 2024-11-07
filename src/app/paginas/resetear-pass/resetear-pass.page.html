@@ -7,11 +7,11 @@
       </div>
   <div class="ion-padding">
     <ion-item>
-      <ion-input type="email" label=""  name="correo"  placeholder="Correo Electronico"></ion-input>
+      <ion-input type="email" label=""  name="email" [(ngModel)]="email" placeholder="Correo Electronico"></ion-input>
           <ion-icon name="mail-outline"><ion-icon name="mail-outline"></ion-icon></ion-icon>
     </ion-item>
       <div class="boton2">
-        <ion-button expand="block" >
+        <ion-button  (click)="resetPassword()"expand="block" >
           Enviar
         </ion-button>
       </div>
