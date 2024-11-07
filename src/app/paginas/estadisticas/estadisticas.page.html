@@ -7,9 +7,24 @@
           </ion-toolbar>
         </ion-header>
         <ion-item>
-            <ion-button expand="block" >Guardar</ion-button>
-            <ion-button (click)="salir()"  expand="block" style="--background:#FF914D">Salir</ion-button>
+            <ion-button (click)="salir()"  expand="block" style="--background:#FF914D">Volver al menú</ion-button>
           </ion-item>
+        </div>
+        <div>
+         
+            <!-- Lista para mostrar las marcas guardadas -->
+            <ion-list>
+              <ion-item *ngFor="let marker of markers">
+                <ion-label>
+                  <h2>Ubicación: {{ marker.lat }}, {{ marker.lng }}</h2>
+                  <p>Precio: ${{ marker.price }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          
+            <!-- Botón para borrar las marcas -->
+            <ion-button (click)="clearMarkers()">Borrar Marcas</ion-button>
+         
         </div>
     </ion-content>
   </ion-app>

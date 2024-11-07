@@ -8,12 +8,13 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-        <ion-button (click)="estadisticas()" shape="round" expand="full" fill="">
+        <ion-button [routerLink]="['/estadisticas']" shape="round" expand="full" fill="">
           Estadisticas</ion-button>
-          <ion-button (click)="cuenta()" shape="round" expand="full" fill="">
+          <ion-button [routerLink]="['/cuenta']" shape="round" expand="full" fill="">
             Cuenta</ion-button>
-            <ion-button (click)="sobre()" shape="round" expand="full" fill="">
+            <ion-button [routerLink]="['/sobre']" shape="round" expand="full" fill="">
               Sobre nosotros</ion-button>
+            
         <br>
         <ion-button (click)="logOut()" style="color: gray;" shape="round" expand="full" fill="">
           <ion-icon name="log-out-outline" slot="end"></ion-icon>
@@ -35,7 +36,7 @@
 
         
         <!-- boton de actualizar ubicacion  -->    
-        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 70px; padding-bottom: 200px;">
+        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 30px; padding-bottom: 200px;">
           <ion-fab-button expand="block" (click)="updateLocation()"  >
             <ion-icon name="location" ></ion-icon>
           </ion-fab-button>
@@ -48,7 +49,7 @@
         </ion-item>
       
         <!-- Botón para habilitar la acción de marcar lugar -->
-        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 70px; padding-bottom: 120px; ">
+        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 30px; padding-bottom: 120px; ">
           <ion-fab-button expand="block" (click)="enableMarking()" style="" >
             <ion-icon name="cash-outline" ></ion-icon>
           </ion-fab-button>
@@ -61,6 +62,7 @@
   <ion-footer >
     <ion-toolbar class="footer">
       <p >GeoCash beta</p>
+      
     </ion-toolbar>
   </ion-footer>
 </ion-app>

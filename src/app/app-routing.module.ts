@@ -45,9 +45,17 @@ const routes: Routes = [
     path: 'error404',
     loadChildren: () => import('./paginas/error404/error404.module').then( m => m.Error404PageModule)
   },
+  {
+    path: 'sobre',
+    loadChildren: () => import('./paginas/sobre/sobre.module').then( m => m.SobrePageModule),canActivate: [AuthGuard]
+  },
   // no encuentra pagina
   { path: 'not-found', component: Error404Page },
-  { path: '**', redirectTo: 'not-found' }
+  { path: '**', redirectTo: 'not-found' },
+ 
+
+  
+
 
 ];
 

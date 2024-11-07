@@ -132,7 +132,9 @@ addClickListener() {
     google.maps.event.addListener(this.map, 'click', (event: any) => {
       const clickedLocation = event.latLng;
       
-      
+      // Obtener latitud y longitud de la ubicación clickeada
+      const latitude = clickedLocation.lat();
+      const longitude = clickedLocation.lng();
 
       // Crear el marcador en la ubicación clickeada
       this.marker = new google.maps.Marker({
@@ -143,15 +145,30 @@ addClickListener() {
 
       // Mostrar un mensaje de confirmación con el número ingresado
       if (this.markerNumber !== undefined) {
-        alert(`Haz gastado en : ${clickedLocation.toString()} Un total de: $ ${this.markerNumber}`);
+        // Recuperar las marcas almacenadas en localStorage, si existen
+        const storedMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
+        
+        // Agregar la nueva marca con la ubicación y el precio
+        storedMarkers.push({
+          lat: latitude,
+          lng: longitude,
+          price: this.markerNumber,
+        });
+
+        // Guardar las marcas actualizadas en localStorage
+        localStorage.setItem('markers', JSON.stringify(storedMarkers));
+
+        // Mostrar alerta con la ubicación y el precio
+        alert(`Haz gastado en: ${clickedLocation.toString()} Un total de: $${this.markerNumber}`);
       } else {
         alert('Debes marcar el precio antes de marcar el lugar');
       }
 
       // Deshabilitar la opción de marcar lugar después de colocar el marcador
-      this.isMarkingEnabled = true;
+      this.isMarkingEnabled = false;
     });
   }
+  
 }  
 
 
@@ -169,11 +186,6 @@ this.authService.signOut().then(()=>{
   console.log(error);
 })
 }
-
-
-
- 
-
 
   salir(){
     this.route.navigate(["/login"]) 

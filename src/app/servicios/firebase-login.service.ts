@@ -68,4 +68,6 @@ export class FirebaseLoginService {
     const user = localStorage.getItem('user');
     return user !== null; // Si existe el usuario en localStorage, está logueado
   }
+
+  
 }
