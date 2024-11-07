@@ -16,6 +16,10 @@ declare var google:any;
 export class HomePage {
 user:any;
 map: any;
+marker: any;
+  markerNumber: number | undefined; // Variable para almacenar el número asociado al marcador
+  isMarkingEnabled: boolean = false; // Controla si el usuario puede marcar lugares en el mapa
+
 
 @ViewChild('map',{read:ElementRef,static:false}) mapRef!: ElementRef;
 
@@ -111,7 +115,43 @@ map: any;
       console.error('Geolocalización no es compatible con este navegador');
     }
   }
+
+
+
     
+// Método para habilitar el modo de marcado
+enableMarking() {
+  this.isMarkingEnabled = true;
+  this.addClickListener();
+}
+// Método que permite agregar un marcador al mapa
+addClickListener() {
+  if (this.isMarkingEnabled) {
+    google.maps.event.addListener(this.map, 'click', (event: any) => {
+      const clickedLocation = event.latLng;
+      
+      
+
+      // Crear el marcador en la ubicación clickeada
+      this.marker = new google.maps.Marker({
+        position: clickedLocation,
+        map: this.map,
+        title: `Marcador - Número: ${this.markerNumber}`,
+      });
+
+      // Mostrar un mensaje de confirmación con el número ingresado
+      if (this.markerNumber !== undefined) {
+        alert(`Haz gastado en : ${clickedLocation.toString()} Un total de: $ ${this.markerNumber}`);
+      } else {
+        alert('Debes marcar el precio antes de marcar el lugar');
+      }
+
+      // Deshabilitar la opción de marcar lugar después de colocar el marcador
+      this.isMarkingEnabled = true;
+    });
+  }
+}  
+
 
   
 

@@ -33,17 +33,28 @@
       <ion-content class="ion-padding">
           <div #map id="map"></div>
 
-
-
-
-
         
         <!-- boton de actualizar ubicacion  -->    
-        <ion-fab horizontal="end" vertical="bottom" slot="fixed" >
+        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 70px; padding-bottom: 200px;">
           <ion-fab-button expand="block" (click)="updateLocation()"  >
             <ion-icon name="location" ></ion-icon>
           </ion-fab-button>
         </ion-fab>
+
+         <!-- Input para ingresar el número -->
+         <ion-item>
+          <ion-label position="floating">Cantidad de dinero gastado</ion-label>
+          <ion-input [(ngModel)]="markerNumber" type="number" placeholder="$"></ion-input>
+        </ion-item>
+      
+        <!-- Botón para habilitar la acción de marcar lugar -->
+        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 70px; padding-bottom: 120px; ">
+          <ion-fab-button expand="block" (click)="enableMarking()" style="" >
+            <ion-icon name="cash-outline" ></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+  
+
       </ion-content>
     </div>
   </ion-content>
