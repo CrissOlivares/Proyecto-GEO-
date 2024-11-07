@@ -19,10 +19,8 @@ map: any;
 
 @ViewChild('map',{read:ElementRef,static:false}) mapRef!: ElementRef;
 
-infoWindows: any = [];
-markers: any = []
 
-  constructor(private route:Router,private router:Router,
+  constructor(private route:Router,
     public authService:FirebaseLoginService
   ) {}
 
@@ -90,7 +88,30 @@ markers: any = []
       this.map = new google.maps.Map(this.mapRef.nativeElement, options);
     }
   }
-
+  updateLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          const location = new google.maps.LatLng(latitude, longitude);
+  
+          // Actualizar la ubicación del mapa
+          this.map.setCenter(location);
+          this.map.setZoom(15);
+  
+          
+        },
+        (error) => {
+          console.error('Error al obtener la ubicación: ', error);
+          alert('No se pudo obtener la ubicación.');
+        }
+      );
+    } else {
+      console.error('Geolocalización no es compatible con este navegador');
+    }
+  }
+    
 
   
 
@@ -105,16 +126,11 @@ markers: any = []
   
 async logOut(){
   this.authService.signOut().then(()=>{
-    this.router.navigate(['/login'])
+    this.route.navigate(['/login'])
   }).catch((error)=>{
     console.log(error);
   })
 }
-
-
-
-
-
 
 
   salir(){
