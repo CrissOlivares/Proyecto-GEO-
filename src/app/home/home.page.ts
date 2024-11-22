@@ -73,7 +73,7 @@ marker: any;
         (error) => {
           console.error('Error al obtener la ubicación: ', error);
           //ubicacion por defecto
-          const defaultLocation = new google.maps.LatLng(-17.824858, 31.053028);
+          const defaultLocation = new google.maps.LatLng();
           const options = {
             center: defaultLocation,
             zoom: 15,
@@ -83,7 +83,7 @@ marker: any;
         }
       );
     } else {
-      console.error('Geolocalización no es compatible con este navegador');
+      console.error('Geolocalización no es compatible');
       // Si la geolocalización no está disponible, ubicación predeterminada
       const defaultLocation = new google.maps.LatLng(-17.824858, 31.053028);
       const options = {
