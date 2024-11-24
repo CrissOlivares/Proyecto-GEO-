@@ -59,6 +59,8 @@ async signUP(){
       this.router.navigate(['/login'])
     }
   } else {
+    loading.dismiss();
+    this.MensajeError();
     return console.log('Por favor rellena todos los espacios');
   }
 }

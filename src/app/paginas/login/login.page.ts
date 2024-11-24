@@ -41,18 +41,21 @@ export class LoginPage implements OnInit {
 
       // loading.dismiss();
       const user = await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password,this.loginForm.value.fullname).catch((err) => {
-        this.presentToast(err)
-        console.log(err);
+        this.MensajeError();
         loading.dismiss();
       })
 
       if (user) {
         loading.dismiss();
+        this.MensajeExito();
         this.router.navigate(
           ['/home'])
       }
     } else {
-      return console.log('Por favor rellena todos los espacios');
+      loading.dismiss();
+      this.MensajeError2();
+      // location.reload();
+      
     }
 
   }
@@ -92,10 +95,20 @@ export class LoginPage implements OnInit {
     const alert = await this.alerta.create({
       header: 'Error al iniciar',
       subHeader: '',
-      message: 'Las credenciales no son válidas, intentalo de nuevo',
+      message: 'Las credenciales no coinciden, intentalo de nuevo',
       buttons:['Aceptar']
     });
     await alert.present();
+}
+
+async MensajeError2() {
+  const alert = await this.alerta.create({
+    header: 'Error',
+    subHeader: '',
+    message: 'Datos incorrectos, intentalo de nuevo',
+    buttons:['Aceptar']
+  });
+  await alert.present();
 }
  
 
