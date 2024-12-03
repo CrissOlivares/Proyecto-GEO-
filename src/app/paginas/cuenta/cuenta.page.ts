@@ -9,18 +9,20 @@ import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
 })
 export class CuentaPage implements OnInit {
   user:any;
+  email: string | null = null;
+  fullname: string | null = null;
   
     constructor(private route:Router,
       public authService:FirebaseLoginService,
     ) {}
   
-   
-    
-    
-  
-  
-  ngOnInit() {
-    this.user = this.authService.getProfile();
+  async ngOnInit() {
+    try {
+      const user = await this.authService.getProfile();
+      this.email = user?.email || null; 
+    } catch (error) {
+      console.error('Error obteniendo el perfil del usuario:', error);
+    }
   }
   
   async logOut(){
@@ -29,37 +31,7 @@ export class CuentaPage implements OnInit {
   }).catch((error)=>{
     console.log(error);
   })
-  }
-  
-  
-  
-   
-  
-  
-    salir(){
-      this.route.navigate(["/login"]) 
-    }
-    cuenta(){
-      this.route.navigate(["/cuenta"]) 
-    }
-    estadisticas(){
-      this.route.navigate(["/estadisticas"]) 
-    }
-    sobre(){
-      this.route.navigate(["/sobre"]) 
-    }
-  
-    // test boton añadir
-    add(){
-      console.log('add')
-      alert("añadir")
-    }
-    canceladd(){
-      console.log('addcash')
-    }
-  
-    
-    
+  }  
   }
   
 

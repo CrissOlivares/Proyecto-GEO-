@@ -13,7 +13,7 @@
             <ion-label>Correo electronico del usuario </ion-label>
           </ion-item>
           <ion-item>
-            <ion-label style="color: gray;">{{user.email}} {{user.fullname}}</ion-label>
+            <ion-label style="color: gray;"> {{ email || 'No disponible' }}</ion-label>
           </ion-item>
           <ion-item>
             <ion-button [routerLink]="['/home']"  expand="block" style="--background:#FF914D">Ir al menú</ion-button>
