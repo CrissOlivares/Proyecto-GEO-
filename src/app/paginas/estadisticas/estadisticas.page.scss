@@ -27,10 +27,12 @@ ion-menu::part(backdrop) {
     --background-focused: #18555C;
 }
 .custom-card {
-  background-color: #f9f9f9;
-  border-radius: 10px;
+  background-color: white;
+  margin-left: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 10px 0;
+  margin-left: 40px;
+  /* Eliminar bordes redondeados */
+  border-radius: 0; 
 }
 
 .place-name {
