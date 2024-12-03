@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FirebaseLoginService } from 'src/app/servicios/firebase-login.service';
+
 
 @Component({
   selector: 'app-estadisticas',
@@ -9,24 +11,33 @@ import { Router } from '@angular/router';
 export class EstadisticasPage implements OnInit {
   markers: any[] = [];
 
-  constructor(private route:Router) { }
+  constructor(private route: Router, private authService: FirebaseLoginService) { }
 
-
-  salir(){
-    this.route.navigate(["/home"]) 
+  salir() {
+    this.route.navigate(["/home"]);
   }
-  ngOnInit() {
-    // Recuperar las marcas guardadas en localStorage
-    const storedMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
-    this.markers = storedMarkers;  // Asignar las marcas al array
+
+  async ngOnInit() {
+    try {
+      const user = await this.authService.getProfile();
+      if (user) {
+        const uid = user.uid;
+        this.markers = await this.authService.getUserExpenses(uid);
+        console.log('Marcas obtenidas:', this.markers);
+      } else {
+        console.error('Usuario no autenticado');
+        alert('Debes iniciar sesión para ver las estadísticas.');
+      }
+    } catch (error) {
+      console.error('Error al obtener las marcas:', error);
+    }
   }
 
   clearMarkers() {
-    localStorage.removeItem('markers');
+    // No es necesario eliminar de localStorage ya que ahora estamos usando Firestore
     this.markers = [];
     alert('Todas las marcas han sido borradas');
   }
-
 }
 
 

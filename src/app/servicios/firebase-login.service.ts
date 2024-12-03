@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, DocumentData, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
@@ -77,6 +77,37 @@ export class FirebaseLoginService {
       }, reject);
     });
   }
-
+  //guarda los datos
+  async saveUserData(uid: string, data: any) {
+    try {
+      await this.firestore.collection('users').doc(uid).collection('expenses').add(data);
+      console.log('Datos guardados correctamente en Firestore.');
+    } catch (error) {
+      console.error('Error al guardar los datos en Firestore:', error);
+      throw error;
+    }
+  }
+  async getUserExpenses(uid: string): Promise<any[]> {
+    try {
+      const expensesSnapshot = await this.firestore
+        .collection('users')
+        .doc(uid)
+        .collection('expenses')
+        .get()
+        .toPromise();
   
+      // Verificar si expensesSnapshot es undefined
+      if (!expensesSnapshot) {
+        console.error('No se encontraron gastos o ocurrió un error');
+        return [];
+      }
+  
+      const expenses = expensesSnapshot.docs.map(doc => doc.data());
+      console.log('Gastos del usuario:', expenses);
+      return expenses;
+    } catch (error) {
+      console.error('Error al obtener los gastos:', error);
+      throw error;
+    }
+  }
 }

@@ -129,47 +129,49 @@ enableMarking() {
 // Método que permite agregar un marcador al mapa
 addClickListener() {
   if (this.isMarkingEnabled) {
-    google.maps.event.addListener(this.map, 'click', (event: any) => {
+    google.maps.event.addListener(this.map, 'click', async (event: any) => {
       const clickedLocation = event.latLng;
 
-      // Crear el servicio de geocodificación
       const geocoder = new google.maps.Geocoder();
 
-      // Geocodificar la ubicación clickeada
-      geocoder.geocode({ location: clickedLocation }, (results: any, status: any) => {
+      geocoder.geocode({ location: clickedLocation }, async (results: any, status: any) => {
         if (status === 'OK' && results[0]) {
-          const placeName = results[0].formatted_address; // Dirección o nombre del lugar
+          const placeName = results[0].formatted_address;
 
-          // Crear el marcador en la ubicación clickeada
           this.marker = new google.maps.Marker({
             position: clickedLocation,
             map: this.map,
             title: placeName,
           });
 
-          // Mostrar un mensaje de confirmación con el nombre del lugar
           if (this.markerNumber !== undefined) {
-            // Recuperar las marcas almacenadas en localStorage, si existen
-            const storedMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
-
-            // Agregar la nueva marca con la ubicación, el nombre y el precio
-            storedMarkers.push({
+            const data = {
               lat: clickedLocation.lat(),
               lng: clickedLocation.lng(),
               price: this.markerNumber,
               placeName: placeName,
-            });
+              timestamp: new Date(),
+            };
 
-            // Guardar las marcas actualizadas en localStorage
-            localStorage.setItem('markers', JSON.stringify(storedMarkers));
+            // Guardar en Firestore
+            const user = await this.authService.getProfile();
+            if (user) {
+              const uid = user.uid;
+              await this.authService.saveUserData(uid, data);
+            } else {
+              console.error('Usuario no autenticado.');
+            }
 
-            // Mostrar alerta con el nombre del lugar y el precio
+            // Guardar en localStorage como respaldo
+            // const storedMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
+            // storedMarkers.push(data);
+            // localStorage.setItem('markers', JSON.stringify(storedMarkers));
+
             alert(`Haz gastado en: ${placeName} Un total de: $${this.markerNumber}`);
           } else {
             alert('Debes marcar el precio antes de marcar el lugar');
           }
 
-          // Deshabilitar la opción de marcar lugar después de colocar el marcador
           this.isMarkingEnabled = false;
         } else {
           console.error('No se pudo obtener el nombre del lugar:', status);
