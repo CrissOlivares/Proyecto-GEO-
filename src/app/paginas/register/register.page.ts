@@ -52,10 +52,13 @@ async signUP(){
       this.presentToast(err)
       console.log(err);
       loading.dismiss();
+      
+
     })
 
     if (user) {
       loading.dismiss();
+      this.MensajeExito();
       this.router.navigate(['/login'])
     }
   } else {
