@@ -83,8 +83,9 @@ export class EstadisticasPage implements OnInit {
         const expenseId = marker.id; // Asegúrate de tener un ID único
         await this.authService.deleteExpense(uid, expenseId);
 
+        
         this.calculateTotal();  // Recalcular el total
-        alert('Gasto eliminado con éxito');
+        alert('Gasto eliminado con éxito  ');
       } else {
         console.error('Usuario no autenticado');
       }

@@ -42,10 +42,10 @@
       </ion-item>
 
       <!-- Botón para actualizar -->
-      <ion-button class="small-button" expand="full"  (click)="recarga()" style="--background: #18555C; --color: white;">
+      <ion-button class="small-button"   (click)="recarga()" style="--background: #18555C; --color: white;">
         Actualizar
       </ion-button>
-      <ion-button  class="small-button" (click)="salir()" expand="block" style="--background:#FF914D">
+      <ion-button  class="small-button" (click)="salir()"  style="--background:#FF914D">
         Volver al menú
       </ion-button>
     </div>
@@ -54,6 +54,12 @@
     <ng-template #noMarkers>
       <ion-text color="medium">
         <h2>No tienes marcas guardadas.</h2>
+        <ion-button  class="small-button" (click)="salir()"  style="--background:#FF914D">
+          Volver al menú
+        </ion-button>
+        <ion-button class="small-button"   (click)="recarga()" style="--background: #18555C; --color: white;">
+          Actualizar
+        </ion-button>
         <p>No hay marcas guardadas</p>
       </ion-text>
     </ng-template>
