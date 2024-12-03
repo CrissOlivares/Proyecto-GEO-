@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'projectgeo',
+  appId: 'proyectGeo.beta',
+  appName: 'GeoCash',
   webDir: 'www'
 };
 
