@@ -6,28 +6,57 @@
           <ion-title>Estadísticas</ion-title>
         </ion-toolbar>
       </ion-header>
-      <ion-item>
-        <ion-button (click)="salir()" expand="block" style="--background:#FF914D">
-          Volver al menú
-        </ion-button>
-      </ion-item>
+
     </div>
 
     <!-- Mostrar las marcas guardadas -->
     <div *ngIf="markers.length > 0; else noMarkers">
       <ion-list>
-        <ion-item *ngFor="let marker of markers">
-          <ion-label>
-            <h2>UBICACIÓN: {{ marker.placeName || 'Nombre no disponible' }}</h2>
-            <p>DINERO GASTADO : ${{ marker.price }}</p>
-          </ion-label>
+        <ion-item *ngFor="let marker of markers; let i = index">
+          <ion-card class="custom-card">
+            <ion-card-header>
+              <ion-card-title class="place-name">{{ marker.placeName || 'Nombre no disponible' }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p class="price">DINERO GASTADO: <span class="money">${{ marker.price }}</span></p>
+              <p class="date">Fecha: {{ formatDate(marker.timestamp) }}</p>
+            </ion-card-content>
+          </ion-card>
+
+          <!-- Botones de editar y eliminar -->
+          <ion-button (click)="editExpense(marker, i)" style="--background: #18555C; --color: white;">
+            Editar
+          </ion-button>
+          
+          <ion-button (click)="deleteExpense(marker, i)" style="--background: #FF914D; --color: white;">
+            Eliminar
+          </ion-button>
         </ion-item>
       </ion-list>
 
-      <!-- Botón para borrar las marcas -->
-      <ion-button expand="full" color="danger" (click)="clearMarkers()">Borrar Marcas</ion-button>
+      <!-- Mostrar el total de los gastos -->
+      <ion-item>
+        <ion-label class="total-gasto">
+          <h3>Total Gastado: <span class="total">${{ total }}</span></h3>
+        </ion-label>
+      </ion-item>
+
+      <!-- Botón para actualizar -->
+      <ion-button class="small-button" expand="full"  (click)="recarga()" style="--background: #18555C; --color: white;">
+        Actualizar
+      </ion-button>
+      <ion-button  class="small-button" (click)="salir()" expand="block" style="--background:#FF914D">
+        Volver al menú
+      </ion-button>
     </div>
 
     <!-- Mensaje cuando no hay marcas -->
     <ng-template #noMarkers>
-     
+      <ion-text color="medium">
+        <h2>No tienes marcas guardadas.</h2>
+        <p>No hay marcas guardadas</p>
+      </ion-text>
+    </ng-template>
+  </ion-content>
+</ion-app>
+

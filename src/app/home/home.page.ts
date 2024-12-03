@@ -144,13 +144,18 @@ addClickListener() {
             title: placeName,
           });
 
-          if (this.markerNumber !== undefined) {
+          // Mostrar pop-up para que el usuario ingrese el precio
+          const price = prompt(`Ingresa el precio para el lugar:  ${placeName}`);
+
+          if (price && !isNaN(Number(price))) {
+            this.markerNumber = Number(price);  // Guardamos el precio
+
             const data = {
               lat: clickedLocation.lat(),
               lng: clickedLocation.lng(),
               price: this.markerNumber,
               placeName: placeName,
-              timestamp: new Date(),
+              timestamp: new Date(),  // Captura la fecha y hora actual
             };
 
             // Guardar en Firestore
@@ -163,13 +168,13 @@ addClickListener() {
             }
 
             // Guardar en localStorage como respaldo
-            // const storedMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
-            // storedMarkers.push(data);
-            // localStorage.setItem('markers', JSON.stringify(storedMarkers));
+            const storedMarkers = JSON.parse(localStorage.getItem('markers') || '[]');
+            storedMarkers.push(data);
+            localStorage.setItem('markers', JSON.stringify(storedMarkers));
 
-            alert(`Haz gastado en: ${placeName} Un total de: $${this.markerNumber}`);
+            
           } else {
-            alert('Debes marcar el precio antes de marcar el lugar');
+            alert('Debes ingresar un precio válido para que se almacene.');
           }
 
           this.isMarkingEnabled = false;
@@ -181,6 +186,8 @@ addClickListener() {
     });
   }
 }
+
+
 
 
 ngOnInit() {

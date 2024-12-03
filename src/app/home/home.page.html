@@ -25,7 +25,7 @@
     <div  class="ion-page" id="main-content">
       <ion-header >
         <ion-toolbar>
-          <ion-title *ngIf="user">Bienvenido a GeoCash, {{ fullname || 'invitado' }}</ion-title>
+          <ion-title *ngIf="user">Bienvenido a GeoCash</ion-title>
           <ion-buttons slot="end">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
@@ -34,7 +34,6 @@
       <!-- si no funciona cambiar el ng-deep por el #map -->
       <ion-content class="ion-padding">
           <div #map id="map"></div>
-
         
         <!-- boton de actualizar ubicacion  -->    
         <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 30px; padding-bottom: 200px;">
@@ -42,28 +41,21 @@
             <ion-icon name="location" ></ion-icon>
           </ion-fab-button>
         </ion-fab>
-
-         <!-- Input para ingresar el número -->
-         <ion-item>
-          <ion-label position="floating">Cantidad de dinero gastado</ion-label>
-          <ion-input [(ngModel)]="markerNumber" type="number" placeholder="$"></ion-input>
-        </ion-item>
       
         <!-- Botón para habilitar la acción de marcar lugar -->
-        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 30px; padding-bottom: 120px; ">
-          <ion-fab-button expand="block" (click)="enableMarking()" style="" >
-            <ion-icon name="cash-outline" ></ion-icon>
+        <ion-fab horizontal="end" vertical="bottom" slot="fixed" style="padding-right: 30px; padding-bottom: 120px;">
+          <ion-fab-button expand="block" (click)="enableMarking()" style="">
+            <ion-icon name="cash-outline"></ion-icon>
           </ion-fab-button>
         </ion-fab>
+        
+        <!-- Mensaje de información cuando el marcaje está habilitado -->
+        <div *ngIf="isMarkingEnabled" style="position: fixed; bottom: 200px; left: 50%; transform: translateX(-50%); font-size: 14px; color: #FF914D; text-align: center; background-color: rgba(0, 0, 0, 0.7); padding: 8px; border-radius: 5px;">
+          Marcaje activado. Haz clic en el mapa para añadir una marca.
+        </div>
   
 
       </ion-content>
     </div>
   </ion-content>
-  <ion-footer >
-    <ion-toolbar class="footer">
-      <p >GeoCash beta</p>
-      
-    </ion-toolbar>
-  </ion-footer>
 </ion-app>

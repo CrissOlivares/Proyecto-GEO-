@@ -87,6 +87,7 @@ export class FirebaseLoginService {
       throw error;
     }
   }
+  //agregar
   async getUserExpenses(uid: string): Promise<any[]> {
     try {
       const expensesSnapshot = await this.firestore
@@ -102,11 +103,45 @@ export class FirebaseLoginService {
         return [];
       }
   
-      const expenses = expensesSnapshot.docs.map(doc => doc.data());
+      // Asegurarse de incluir el ID del documento
+      const expenses = expensesSnapshot.docs.map(doc => ({
+        id: doc.id,  // Guardar el ID del documento
+        ...doc.data()  // Y los datos asociados
+      }));
       console.log('Gastos del usuario:', expenses);
       return expenses;
     } catch (error) {
       console.error('Error al obtener los gastos:', error);
+      throw error;
+    }
+  }
+  //editar
+  async updateExpense(uid: string, expenseId: string, updatedData: any): Promise<void> {
+    try {
+      await this.firestore
+        .collection('users')
+        .doc(uid)
+        .collection('expenses')
+        .doc(expenseId)
+        .update(updatedData);
+      console.log('Gasto actualizado exitosamente');
+    } catch (error) {
+      console.error('Error al actualizar el gasto:', error);
+      throw error;
+    }
+  }
+//eliminar
+  async deleteExpense(uid: string, expenseId: string): Promise<void> {
+    try {
+      await this.firestore
+        .collection('users')
+        .doc(uid)
+        .collection('expenses')
+        .doc(expenseId)
+        .delete();
+      console.log('Gasto eliminado exitosamente');
+    } catch (error) {
+      console.error('Error al eliminar el gasto:', error);
       throw error;
     }
   }
