@@ -48,7 +48,7 @@ async signUP(){
   await loading.present();
   if (this.ionicForm.valid) {
 
-    const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password, this.ionicForm.value.password).catch((err: undefined) => {
+    const user = await this.authService.registerUser(this.ionicForm.value.email, this.ionicForm.value.password, this.ionicForm.value.fullname).catch((err: undefined) => {
       this.presentToast(err)
       console.log(err);
       loading.dismiss();
