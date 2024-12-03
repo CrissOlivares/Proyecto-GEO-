@@ -1,31 +1,33 @@
 <ion-app>
-    <ion-content>
-      <div  class="ion-page" id="main-content">
-        <ion-header >
-          <ion-toolbar>
-            <ion-title>Estadisticas</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-item>
-            <ion-button (click)="salir()"  expand="block" style="--background:#FF914D">Volver al menú</ion-button>
-          </ion-item>
-        </div>
-        <div>
-         
-            <!--  mostrar las marcas guardadas -->
-            <ion-list>
-              <ion-item *ngFor="let marker of markers">
-                <ion-label>
-                  <h2>Ubicación: {{ marker.lat }}, {{ marker.lng }}</h2>
-                  <p>Precio: ${{ marker.price }}</p>
-                </ion-label>
-              </ion-item>
-            </ion-list>
-          
-            <!-- boton para borrar las marcas -->
-            <ion-button (click)="clearMarkers()">Borrar Marcas</ion-button>
-         
-        </div>
-    </ion-content>
-  </ion-app>
-  
+  <ion-content>
+    <div class="ion-page" id="main-content">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Estadísticas</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-item>
+        <ion-button (click)="salir()" expand="block" style="--background:#FF914D">
+          Volver al menú
+        </ion-button>
+      </ion-item>
+    </div>
+
+    <!-- Mostrar las marcas guardadas -->
+    <div *ngIf="markers.length > 0; else noMarkers">
+      <ion-list>
+        <ion-item *ngFor="let marker of markers">
+          <ion-label>
+            <h2>UBICACIÓN: {{ marker.placeName || 'Nombre no disponible' }}</h2>
+            <p>DINERO GASTADO : ${{ marker.price }}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <!-- Botón para borrar las marcas -->
+      <ion-button expand="full" color="danger" (click)="clearMarkers()">Borrar Marcas</ion-button>
+    </div>
+
+    <!-- Mensaje cuando no hay marcas -->
+    <ng-template #noMarkers>
+     

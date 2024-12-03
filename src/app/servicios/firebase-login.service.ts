@@ -51,11 +51,5 @@ export class FirebaseLoginService {
     })
   }
 
-  // // Verificar si el usuario está logueado
-  // isLoggedIn(): boolean {
-  //   const user = localStorage.getItem('user');
-  //   return user !== null; // Si existe el usuario en localStorage, está logueado
-  // }
-
   
 }
