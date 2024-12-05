@@ -22,7 +22,7 @@ export class EstadisticasPage implements OnInit {
 // Formatear la fecha y hora desde Firestore
   formatDate(date: any): string {
     const formattedDate = new Date(date.seconds * 1000);  // Convertir el timestamp de Firestore
-    return formattedDate.toLocaleString();  // Formatear la fecha en una cadena legible
+    return formattedDate.toLocaleString();  
   }
   async ngOnInit() {
     try {
@@ -31,7 +31,7 @@ export class EstadisticasPage implements OnInit {
         const uid = user.uid;
         this.markers = await this.authService.getUserExpenses(uid);
         console.log('Marcas obtenidas:', this.markers);
-        this.calculateTotal(); // Llamamos a la función para calcular el total
+        this.calculateTotal(); // llama ala funciona para calcular el total
       } else {
         console.error('Usuario no autenticado');
         alert('Debes iniciar sesión para ver las estadísticas.');
@@ -50,7 +50,6 @@ export class EstadisticasPage implements OnInit {
   async editExpense(marker: any, index: number) {
     const updatedPrice = prompt('Nuevo precio:', marker.price.toString());
     if (updatedPrice) {
-      // Asegúrate de que el precio es un número válido
       const updatedData = {
         price: parseFloat(updatedPrice),
         timestamp: marker.timestamp  // Mantener el timestamp original
@@ -59,14 +58,14 @@ export class EstadisticasPage implements OnInit {
       const user = await this.authService.getProfile();
       if (user) {
         const uid = user.uid;
-        const expenseId = marker.id; // Asegúrate de que tienes un ID único para cada gasto
+        const expenseId = marker.id; //id de los gastos
         await this.authService.updateExpense(uid, expenseId, updatedData);
 
-        // Actualizar la lista de gastos localmente
+        // Actualizar la lista 
         this.markers[index].price = updatedData.price;
         this.markers[index].timestamp = updatedData.timestamp;
 
-        this.calculateTotal();  // Recalcular el total
+        this.calculateTotal();  //total final
         alert('Gasto actualizado con éxito');
       } else {
         console.error('Usuario no autenticado');

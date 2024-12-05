@@ -55,7 +55,7 @@ marker: any;
 
           // Opciones del mapa
           const options = {
-            center: location, //ubicación actual como el centro
+            center: location, //ubicación actual como el centro, quizas cambiar no se xD
             zoom: 15,
             disableDefaultUI: true, 
           };
@@ -85,7 +85,7 @@ marker: any;
     } else {
       console.error('Geolocalización no es compatible');
       // Si la geolocalización no está disponible, ubicación predeterminada
-      const defaultLocation = new google.maps.LatLng(-17.824858, 31.053028);
+      const defaultLocation = new google.maps.LatLng(-33.0544297, -71.3943011);
       const options = {
         center: defaultLocation,
         zoom: 15,
@@ -148,7 +148,7 @@ addClickListener() {
           const price = prompt(`Ingresa el precio para el lugar:  ${placeName}`);
 
           if (price && !isNaN(Number(price))) {
-            this.markerNumber = Number(price);  // Guardamos el precio
+            this.markerNumber = Number(price);  // Guardado del precio
 
             const data = {
               lat: clickedLocation.lat(),

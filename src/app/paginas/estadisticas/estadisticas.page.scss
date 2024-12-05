@@ -31,7 +31,7 @@ ion-menu::part(backdrop) {
   margin-left: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-left: 40px;
-  /* Eliminar bordes redondeados */
+  
   border-radius: 0; 
 }
 
@@ -58,7 +58,7 @@ ion-menu::part(backdrop) {
   color: #777;
   font-style: italic;
 }
-/* Estilo para el total gastado */
+
 .total-gasto {
   display: block;
   margin: 20px 0;
@@ -69,25 +69,25 @@ ion-menu::part(backdrop) {
 }
 
 .total-gasto h3 {
-  font-size: 20px; /* Tamaño de la fuente mayor */
+  font-size: 20px; 
   font-weight: bold;
-  color: #FF914D; /* Verde brillante */
+  color: #FF914D; 
   margin: 0;
 }
 
 .total {
-  font-size: 50px; /* Número más grande */
+  font-size: 50px; 
   font-weight: bolder;
   
 }
 
 .small-button {
-  --padding-start: 8px; /* Menos espacio al principio */
-  --padding-end: 8px;   /* Menos espacio al final */
-  --padding-top: 6px;   /* Menos espacio en la parte superior */
-  --padding-bottom: 6px;/* Menos espacio en la parte inferior */
-  font-size: 0.9rem;     /* Texto más pequeño */
-  border-radius: 6px;    /* Bordes más redondeados */
+  --padding-start: 8px; 
+  --padding-end: 8px;  
+  --padding-top: 6px;   
+  --padding-bottom: 6px;
+  font-size: 0.9rem;    
+  border-radius: 6px;   
 }
 
 

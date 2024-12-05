@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
     // console.log(this.email + this.password);
     if (this.loginForm.valid) {
 
-      // loading.dismiss();
+      
       const user = await this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).catch((err) => {
         this.MensajeError();
         loading.dismiss();
@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
     } else {
       loading.dismiss();
       this.MensajeError2();
-      // location.reload();
+    
       
     }
 
